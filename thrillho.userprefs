@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Core/Game.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Core/SpeakerExtension.cs">
     <Files>
-      <File FileName="Assets/Scripts/Core/Startup.cs" Line="8" Column="3" />
-      <File FileName="Assets/Scripts/Core/Game.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Core/AudioManager.cs" Line="52" Column="4" />
+      <File FileName="Assets/Scripts/Core/SpeakerExtension.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
