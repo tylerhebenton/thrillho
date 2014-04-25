@@ -44,7 +44,7 @@ public class AudioManager : MonoBehaviour {
 
   public static AudioClip RandomAudioClip(string soundName) {
     AudioClip clip = null;
-    string soundPath = "Audio/Sound/" + soundName;
+    string soundPath = "Sound/" + soundName;
     
     // if we're given a directory path, assume children are sound files.
     // pick one at random and play it.
