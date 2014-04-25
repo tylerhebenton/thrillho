@@ -4,6 +4,8 @@
 [Oo]bj/
 [Aa]ssets/_*
 [Bb]uild/*
+Library/assetDatabase3
+Library/guidmapper
 
 # White-listed files
 ![Ll]ibrary/EditorUserBuildSettings.asset
