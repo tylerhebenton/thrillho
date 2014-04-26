@@ -13,7 +13,6 @@ public class KillVolume : MonoBehaviour {
   public Targets targets = Targets.Heros;
 
   void OnTriggerEnter2D(Collider2D collider) {
-
     if(targets == Targets.Heros || targets == Targets.All) {
       Hero player = collider.GetComponent<Hero>();
       if(player) {
@@ -31,6 +30,7 @@ public class KillVolume : MonoBehaviour {
     if(targets == Targets.Bullets || targets == Targets.All) {
       Bullet bullet = collider.GetComponent<Bullet>();
       if(bullet) {
+        Debug.Log("Collide with bullet");
         GameObject.Destroy(bullet.gameObject);
       }
     }
