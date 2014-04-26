@@ -4,27 +4,29 @@ using System.Collections;
 public class GameplayDirector : MonoBehaviour {
 
   [SerializeField]
-  private Transform[] levels;
+  private Transform[]
+    levels;
   public int curLevelIndex = 0;
-
   [SerializeField]
-  private Transform levelRoot;
-
+  private Transform
+    levelRoot;
   [SerializeField]
-  private Transform heroPrefab;
-
+  private Transform
+    heroPrefab;
   [SerializeField]
-	private Transform heroSpawnPoint;
-
+  private Transform
+    heroSpawnPoint;
   [SerializeField]
-  public GameObject mainCamera;
+  public GameObject
+    mainCamera;
 
   #region UI
   [SerializeField]
-  private GameObject gameOverUi;
+  private GameObject
+    gameOverUi;
   #endregion
 
-  public int Lives { get; set;}
+  public int Lives { get; set; }
 
   private Hero curHero = null;
 
@@ -43,7 +45,6 @@ public class GameplayDirector : MonoBehaviour {
 
     Lives = GameConfig.Instance.maxLives;
   }
-
   
   void Update() {
 
@@ -80,11 +81,17 @@ public class GameplayDirector : MonoBehaviour {
         Destroy(child.gameObject); 
       }
 
-      Transform newLevel = GameObject.Instantiate(levels[index], levelRoot.transform.position, Quaternion.identity) as Transform;
-      newLevel.parent = levelRoot;
-      newLevel.gameObject.name = levels[index].gameObject.name;
+      mainCamera.transform.position = Vector3.zero;
 
+
+      Transform newLevelGo = GameObject.Instantiate(levels[index], levelRoot.transform.position, Quaternion.identity) as Transform;
+      newLevelGo.parent = levelRoot;
+      newLevelGo.gameObject.name = levels[index].gameObject.name;
+
+      Level newLevel = newLevelGo.GetComponent<Level>();
+     
       SpawnHero();
+      mainCamera.GetComponent<CameraController>().FollowWaypoints(newLevel);
     }
 
   }
@@ -108,6 +115,7 @@ public class GameplayDirector : MonoBehaviour {
       //Respawn
       Lives = curLives;
       SpawnHero();
+      mainCamera.GetComponent<CameraController>().HaltThenGotoWaypoint();
     }
   }
 
