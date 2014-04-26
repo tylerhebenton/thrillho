@@ -83,14 +83,16 @@ public class GameplayDirector : MonoBehaviour {
 
   private void SpawnHero() {
     Debug.Log("Current Lives: " + Lives);
-    GameObject.Instantiate(heroPrefab, heroSpawnPoint.position, Quaternion.identity);
+    Transform newHero = GameObject.Instantiate(heroPrefab, heroSpawnPoint.position, Quaternion.identity) as Transform;
+    newHero.GetComponent<Hero>().GameplayDirector = this;
   }
 
-  private void RespawnHero() {
+  public void Kill(Hero hero) {
     int curLives = Lives - 1;
-    if(Lives < 0) {
+    if(curLives < 0) {
       GameOver(false);
     } else {
+      //Respawn
       Lives = curLives;
       SpawnHero();
     }
