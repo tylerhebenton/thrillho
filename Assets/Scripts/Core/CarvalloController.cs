@@ -6,6 +6,8 @@ public class CarvalloController : MonoBehaviour {
 	[SerializeField]
 	private float runAcceleration;
 	[SerializeField]
+	private float walkTopSpeed;
+	[SerializeField]
 	private float runTopSpeed;
 
 	[SerializeField]
@@ -18,6 +20,9 @@ public class CarvalloController : MonoBehaviour {
 	[SerializeField]
 	[Range(0,1)]
 	private float jumpHoldTime;
+	[SerializeField]
+	[Range(1,2)]
+	private float jumpFallGravityAccel;
 	private float jumpStartTime = 0;
 	private bool wasJumping = false;
 	private bool headingDown = false;
@@ -39,16 +44,19 @@ public class CarvalloController : MonoBehaviour {
 
 	void FixedRun(){
 		float horizontal = Input.GetAxis(InputAxes.HORIZONTAL);
+		bool running = Input.GetButton(InputAxes.RUN);
+		Debug.Log("Horizontal: "+horizontal);
+		float topSpeed = running ? runTopSpeed * horizontal : walkTopSpeed * horizontal;
+		Debug.Log("TOPSPEED: "+topSpeed);
 		if(horizontal != 0){
-			if(Mathf.Abs(rigidbody2D.velocity.x) < runTopSpeed){
-				rigidbody2D.AddForce(runAcceleration * horizontal * Time.fixedDeltaTime * transform.right);
+			rigidbody2D.AddForce(runAcceleration * horizontal * Time.fixedDeltaTime * transform.right);
+			if(Mathf.Abs(rigidbody2D.velocity.x) > topSpeed){
+				rigidbody2D.velocity = new Vector2(topSpeed,rigidbody2D.velocity.y);
 			}
-			if(rigidbody2D.velocity.x > runTopSpeed){
-				rigidbody2D.velocity = new Vector2(runTopSpeed,rigidbody2D.velocity.y);
-			}
-			if(rigidbody2D.velocity.x < -runTopSpeed){
-				rigidbody2D.velocity = new Vector2(-runTopSpeed,rigidbody2D.velocity.y);
-			}
+			Debug.Log("VELO: "+rigidbody2D.velocity.x);
+//			if(rigidbody2D.velocity.x < topSpeed * horizontal){
+//				rigidbody2D.velocity = new Vector2(runTopSpeed * horizontal,rigidbody2D.velocity.y);
+//			}
 //			rigidbody2D.velocity = new Vector2(runTopSpeed * horizontal, rigidbody2D.velocity.y);
 		} else {
 //			rigidbody2D.velocity = new Vector2(0,rigidbody2D.velocity.y);
@@ -59,12 +67,13 @@ public class CarvalloController : MonoBehaviour {
 		}
 	}
 	void FixedJump(){
-		if(Input.GetAxis(InputAxes.JUMP) > 0){
+		bool jumping = Input.GetButton(InputAxes.JUMP);
+		if(jumping){
 			if(!wasJumping){
 				jumpStartTime = Time.time;
 			}
 			if(Time.time - jumpStartTime < jumpHoldTime){
-				rigidbody2D.velocity += Vector2.up*jumpSpeed;
+				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,jumpSpeed);
 			}
 			wasJumping = true;
 		}
@@ -74,9 +83,8 @@ public class CarvalloController : MonoBehaviour {
 			}
 		}
 		if(headingDown){
-			
-			rigidbody2D.gravityScale *= 1.15f;
-			if(rigidbody2D.velocity.y >= 0){
+			rigidbody2D.gravityScale *= jumpFallGravityAccel;
+			if(rigidbody2D.velocity.y >= 0 && !jumping){
 				rigidbody2D.gravityScale = initialGravity;
 				headingDown = false;
 				wasJumping = false;
