@@ -3,18 +3,39 @@ using System.Collections;
 
 public class Monster : Unit {
 
+  public enum MonsterStates {
+    Idle,
+    Aggro,
+    Dead
+  }
+
+  public MonsterStates state = MonsterStates.Idle;
+
   void Update() {
-    FireUpdate();
+    if(state == MonsterStates.Aggro) {
+      FireUpdate();
+    }
+  }
+
+  public void Aggro() {
+    if(state == MonsterStates.Idle) {
+      state = MonsterStates.Aggro;
+      this.OnAggro();
+    }
+  }
+
+  public virtual void OnAggro() {
+    //Override this to allow shooting
   }
 
   private void FireUpdate() {
-    if(unitConfig == null || unitConfig.canShoot == false) {
+    if(unitConfig == null || unitConfig.autoShoot == false) {
       return;
     }
 
+
     float curTime = Time.fixedTime;
     if(curTime > this.lastShootTime + unitConfig.fireCooldown) {
-      //Debug.Log("BLAM", this);
 
       if(unitConfig.bulletPrefab == null) {
         Debug.LogError("Unable to fire without a bulletPrefab", this);

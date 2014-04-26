@@ -6,6 +6,9 @@ public class GameConfig : ScriptableObject {
 
   public int maxLives = 8;
 
+  [Range(0, 4f)]
+  public float cameraDelayOnDeath = 2f;
+
 
   private static GameConfig _instance = null;
   public static GameConfig Instance {
