@@ -45,21 +45,13 @@ public class CarvalloController : MonoBehaviour {
 	void FixedRun(){
 		float horizontal = Input.GetAxis(InputAxes.HORIZONTAL);
 		bool running = Input.GetButton(InputAxes.RUN);
-		Debug.Log("Horizontal: "+horizontal);
 		float topSpeed = running ? runTopSpeed * horizontal : walkTopSpeed * horizontal;
-		Debug.Log("TOPSPEED: "+topSpeed);
 		if(horizontal != 0){
 			rigidbody2D.AddForce(runAcceleration * horizontal * Time.fixedDeltaTime * transform.right);
 			if(Mathf.Abs(rigidbody2D.velocity.x) > topSpeed){
 				rigidbody2D.velocity = new Vector2(topSpeed,rigidbody2D.velocity.y);
 			}
-			Debug.Log("VELO: "+rigidbody2D.velocity.x);
-//			if(rigidbody2D.velocity.x < topSpeed * horizontal){
-//				rigidbody2D.velocity = new Vector2(runTopSpeed * horizontal,rigidbody2D.velocity.y);
-//			}
-//			rigidbody2D.velocity = new Vector2(runTopSpeed * horizontal, rigidbody2D.velocity.y);
 		} else {
-//			rigidbody2D.velocity = new Vector2(0,rigidbody2D.velocity.y);
 			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x*kineticFriction,rigidbody2D.velocity.y);
 			if(Mathf.Abs(rigidbody2D.velocity.x) < staticFriction){
 				rigidbody2D.velocity = new Vector2(0,rigidbody2D.velocity.y);
