@@ -20,4 +20,19 @@ public class Unit : MonoBehaviour {
     
     Destroy(this.gameObject);
   }
+
+  public virtual void Update(){
+    SetFacing();
+  }
+
+  public virtual void SetFacing(){
+    if(rigidbody2D){
+      if(rigidbody2D.velocity.x > 0){
+        direction = Directions.Right;
+      } else if (rigidbody.velocity.x < 0){
+        direction = Directions.Left;
+      }
+    }
+  }
+
 }
