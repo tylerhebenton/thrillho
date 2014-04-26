@@ -51,6 +51,8 @@
      <Compile Include="Assets\Scripts\Core\Game.cs" />
      <Compile Include="Assets\Scripts\Core\SpeakerExtension.cs" />
      <Compile Include="Assets\Scripts\Core\Startup.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\GameplayDirector.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Level.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
