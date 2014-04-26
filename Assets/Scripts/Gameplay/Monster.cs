@@ -3,8 +3,25 @@ using System.Collections;
 
 public class Monster : Unit {
 
+  public enum MonsterStates {
+    Idle,
+    Aggro,
+    Dead
+  }
+
+  public MonsterStates state = MonsterStates.Idle;
+
   void Update() {
-    FireUpdate();
+    if(state == MonsterStates.Aggro) {
+      FireUpdate();
+    }
+  }
+
+  public void Aggro() {
+    if(state == MonsterStates.Idle) {
+      Debug.Log("RAWR",this);
+      state = MonsterStates.Aggro;
+    }
   }
 
   private void FireUpdate() {
