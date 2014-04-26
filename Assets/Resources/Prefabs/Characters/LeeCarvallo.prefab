@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f09466608b0ed449cb010680b85e87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 0
+  direction: 1
   unitConfig: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
