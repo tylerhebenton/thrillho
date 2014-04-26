@@ -16,6 +16,9 @@ public class GameplayDirector : MonoBehaviour {
   [SerializeField]
 	private Transform heroSpawnPoint;
 
+  [SerializeField]
+  public GameObject mainCamera;
+
   #region UI
   [SerializeField]
   private GameObject gameOverUi;
