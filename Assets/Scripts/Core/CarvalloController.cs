@@ -27,19 +27,30 @@ public class CarvalloController : MonoBehaviour {
 	private bool wasJumping = false;
 	private bool headingDown = false;
 
+  [SerializeField]
+  private BoxCollider2D footCollider;
+
+  private bool wasJumpingDown = false;
+
 	private float initialGravity;
+
+  private int footLayer;
+  private int platformLayer;
 
 	void Start () {
 		initialGravity = rigidbody2D.gravityScale;
+    footLayer = LayerMask.NameToLayer("foot");
+    platformLayer = LayerMask.NameToLayer("platform");
 	}
 	
-	void FixedUpdate () {
+  void FixedUpdate () {
+    FixedCustomPhysics();
+    FixedJump();
 		FixedRun ();
 		if(Input.GetAxis(InputAxes.ATTACK_MELEE) > 0){
 		}
 		if(Input.GetAxis(InputAxes.ATTACK_RANGED) > 0){
 		}
-		FixedJump();
 	}
 
 	void FixedRun(){
@@ -59,7 +70,7 @@ public class CarvalloController : MonoBehaviour {
 		}
 	}
 	void FixedJump(){
-		bool jumping = Input.GetButton(InputAxes.JUMP);
+    bool jumping = (Input.GetButton(InputAxes.JUMP) && Input.GetAxis(InputAxes.VERTICAL) <= 0.7f);
 		if(jumping){
 			if(!wasJumping){
 				jumpStartTime = Time.time;
@@ -68,7 +79,9 @@ public class CarvalloController : MonoBehaviour {
 				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,jumpSpeed);
 			}
 			wasJumping = true;
-		}
+    } else {
+      jumpStartTime = 0;
+    }
 		if(wasJumping){
 			if(rigidbody2D.velocity.y < 0){
 				headingDown = true;
@@ -81,6 +94,27 @@ public class CarvalloController : MonoBehaviour {
 				headingDown = false;
 				wasJumping = false;
 			}
-		}
+    }
 	}
+  void FixedCustomPhysics(){
+    bool jumpingDown = (Input.GetButton(InputAxes.JUMP) && Input.GetAxis(InputAxes.VERTICAL) > 0.7f);
+    if(jumpingDown){
+      Debug.Log("JUMPING DOWN");
+      if(!wasJumpingDown){
+        Debug.Log("Upward Impulse");
+        rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,6);
+        StartCoroutine(HopDown());
+      }
+      wasJumpingDown = true;
+    } else {
+      wasJumpingDown = false;
+    }
+    Physics2D.IgnoreLayerCollision(footLayer,platformLayer, rigidbody2D.velocity.y > 0);
+  }
+
+  private IEnumerator HopDown(){
+    footCollider.enabled = false;
+    yield return new WaitForSeconds(0.2f);
+    footCollider.enabled = true;
+  }
 }
