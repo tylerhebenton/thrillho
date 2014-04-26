@@ -11,7 +11,17 @@ public class GameplayDirector : MonoBehaviour {
   private Transform levelRoot;
 
   [SerializeField]
+  private Transform heroPrefab;
+
+  [SerializeField]
+	private Transform heroSpawnPoint;
+
+  #region UI
+  [SerializeField]
   private GameObject gameOverUi;
+  #endregion
+
+  public int Lives { get; set;}
 
   // Use this for initialization
   void Start() {
@@ -19,6 +29,14 @@ public class GameplayDirector : MonoBehaviour {
     LoadLevel(0);
   }
 
+  private void Initialize() {
+    curLevelIndex = 0;
+    this.gameOverUi.SetActive(false);
+
+    Lives = GameConfig.Instance.maxLives;
+  }
+
+  
   void Update() {
 
     if(Input.GetKeyDown("escape")) {
@@ -34,11 +52,6 @@ public class GameplayDirector : MonoBehaviour {
         NextLevel();
       }
     }
-  }
-
-  private void Initialize() {
-    curLevelIndex = 0;
-    this.gameOverUi.SetActive(false);
   }
 
   public void NextLevel() {
@@ -62,8 +75,25 @@ public class GameplayDirector : MonoBehaviour {
       Transform newLevel = GameObject.Instantiate(levels[index], levelRoot.transform.position, Quaternion.identity) as Transform;
       newLevel.parent = levelRoot;
       newLevel.gameObject.name = levels[index].gameObject.name;
+
+      SpawnHero();
     }
 
+  }
+
+  private void SpawnHero() {
+    Debug.Log("Current Lives: " + Lives);
+    GameObject.Instantiate(heroPrefab, heroSpawnPoint.position, Quaternion.identity);
+  }
+
+  private void RespawnHero() {
+    int curLives = Lives - 1;
+    if(Lives < 0) {
+      GameOver(false);
+    } else {
+      Lives = curLives;
+      SpawnHero();
+    }
   }
 
   /// <summary>
