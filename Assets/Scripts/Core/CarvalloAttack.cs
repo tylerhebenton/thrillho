@@ -24,14 +24,21 @@ public class CarvalloAttack : MonoBehaviour {
   }
 
   void Melee(float horizontal, float vertical){
-    Debug.Log("SWING");
+    List<Monster> monstersToRemove = new List<Monster>();
     foreach(Monster monster in monstersInRange){
+      if(monster == null){
+        monstersToRemove.Add(monster);
+        continue;
+      }
       monster.Die();
     }
-    List<Bullet> toRemove = new List<Bullet>();
+    foreach(Monster monster in monstersToRemove){
+      monstersInRange.Remove(monster);
+    }
+    List<Bullet> bulletsToRemove = new List<Bullet>();
     foreach(Bullet bullet in bulletsInRange){
       if(bullet == null){
-        toRemove.Add(bullet);
+        bulletsToRemove.Add(bullet);
         continue;
       }
       if(bullet.GetType() != bulletPrefab.GetType()){
@@ -55,7 +62,7 @@ public class CarvalloAttack : MonoBehaviour {
         }
       }
     }
-    foreach (Bullet b in toRemove){
+    foreach (Bullet b in bulletsToRemove){
       bulletsInRange.Remove(b);
     }
   }
