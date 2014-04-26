@@ -4,9 +4,9 @@ using System.Collections;
 public class Goal : MonoBehaviour {
 
   void OnTriggerEnter2D(Collider2D collider) {
-    Hero player = collider.GetComponent<Hero>();
-    if(player) {
-      player.GameplayDirector.NextLevel();
+    HeroBody body = collider.GetComponent<HeroBody>();
+    if(body && body.hero) {
+      body.hero.GameplayDirector.NextLevel();
     }
   }
   

@@ -3,6 +3,9 @@ using System.Collections;
 
 public class CarvalloController : MonoBehaviour {
 
+  public event System.Action<float,float> MeleeFired = (float horizontal,float vertical)=>{};
+  public event System.Action<float,float> RangedFired = (float horizontal, float vertical)=>{};
+
 	[SerializeField]
 	private float runAcceleration;
 	[SerializeField]
@@ -44,17 +47,30 @@ public class CarvalloController : MonoBehaviour {
 	}
 	
   void FixedUpdate () {
-    FixedCustomPhysics();
-    FixedJump();
-		FixedRun ();
-		if(Input.GetAxis(InputAxes.ATTACK_MELEE) > 0){
-		}
-		if(Input.GetAxis(InputAxes.ATTACK_RANGED) > 0){
-		}
+    float horizontal = Input.GetAxis(InputAxes.HORIZONTAL);
+    float vertical = Input.GetAxis(InputAxes.VERTICAL);
+    FixedCustomPhysics(horizontal,vertical);
+    FixedJump(horizontal,vertical);
+    FixedRun(horizontal,vertical);
+    FixedAttack(horizontal,vertical);
 	}
+  
+  void FixedCustomPhysics(float horizontal, float vertical){
+    bool jumpingDown = (Input.GetButton(InputAxes.JUMP) && vertical > 0.7f);
+    if(jumpingDown){
+      if(!wasJumpingDown){
+        StartCoroutine(HopDown());
+        wasJumping = true;
+        headingDown = true;
+      }
+      wasJumpingDown = true;
+    } else {
+      wasJumpingDown = false;
+    }
+    Physics2D.IgnoreLayerCollision(footLayer,platformLayer, rigidbody2D.velocity.y > 0);
+  }
 
-	void FixedRun(){
-		float horizontal = Input.GetAxis(InputAxes.HORIZONTAL);
+  void FixedRun(float horizontal, float vertical){
 		bool running = Input.GetButton(InputAxes.RUN);
 		float topSpeed = running ? runTopSpeed * horizontal : walkTopSpeed * horizontal;
 		if(horizontal != 0){
@@ -69,8 +85,9 @@ public class CarvalloController : MonoBehaviour {
 			}
 		}
 	}
-	void FixedJump(){
-    bool jumping = (Input.GetButton(InputAxes.JUMP) && Input.GetAxis(InputAxes.VERTICAL) <= 0.7f);
+
+  void FixedJump(float horizontal, float vertical){
+    bool jumping = (Input.GetButton(InputAxes.JUMP) && vertical <= 0.7f);
 		if(jumping){
 			if(!wasJumping){
 				jumpStartTime = Time.time;
@@ -96,21 +113,14 @@ public class CarvalloController : MonoBehaviour {
 			}
     }
 	}
-  void FixedCustomPhysics(){
-    bool jumpingDown = (Input.GetButton(InputAxes.JUMP) && Input.GetAxis(InputAxes.VERTICAL) > 0.7f);
-    if(jumpingDown){
-      Debug.Log("JUMPING DOWN");
-      if(!wasJumpingDown){
-        Debug.Log("Upward Impulse");
-        StartCoroutine(HopDown());
-        wasJumping = true;
-        headingDown = true;
-      }
-      wasJumpingDown = true;
-    } else {
-      wasJumpingDown = false;
+
+  void FixedAttack(float horizontal, float vertical){
+    if(Input.GetButtonDown(InputAxes.ATTACK_MELEE)){
+      MeleeFired(horizontal,vertical);
     }
-    Physics2D.IgnoreLayerCollision(footLayer,platformLayer, rigidbody2D.velocity.y > 0);
+    if(Input.GetButtonDown(InputAxes.ATTACK_RANGED)){
+      RangedFired(horizontal,vertical);
+    }
   }
 
   private IEnumerator HopDown(){

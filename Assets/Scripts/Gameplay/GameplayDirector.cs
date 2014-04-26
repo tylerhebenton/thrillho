@@ -102,7 +102,9 @@ public class GameplayDirector : MonoBehaviour {
     AudioManager.Instance.PlaySound("EpisodeVox/IAmCarvallo");
 
     Transform newHero = GameObject.Instantiate(heroPrefab, heroSpawnPoint.position, Quaternion.identity) as Transform;
-    newHero.GetComponent<Hero>().GameplayDirector = this;
+    Hero hero = newHero.GetComponent<Hero>();
+    hero.GameplayDirector = this;
+    hero.ActivateRespawnInvincibility();
     newHero.transform.parent = levelRoot.transform;
     curHero = newHero.GetComponent<Hero>();
   }

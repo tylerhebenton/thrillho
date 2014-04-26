@@ -14,9 +14,9 @@ public class KillVolume : MonoBehaviour {
 
   void OnTriggerEnter2D(Collider2D collider) {
     if(targets == Targets.Heros || targets == Targets.All) {
-      Hero player = collider.GetComponent<Hero>();
-      if(player) {
-        player.Die();
+      HeroBody body = collider.GetComponent<HeroBody>();
+      if(body && body.hero) {
+        body.hero.Die();
       }
     }
 
