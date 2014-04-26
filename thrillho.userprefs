@@ -1,10 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Gameplay/GameplayDirector.cs">
     <Files>
       <File FileName="Assets/Scripts/Core/SpeakerExtension.cs" Line="28" Column="3" />
       <File FileName="Assets/Scripts/Core/AudioManager.cs" Line="46" Column="27" />
-      <File FileName="Assets/Scripts/Gameplay/GameplayDirector.cs" Line="4" Column="48" />
+      <File FileName="Assets/Scripts/Gameplay/GameplayDirector.cs" Line="71" Column="7" />
+      <File FileName="Assets/Scripts/Core/Feature.cs" Line="10" Column="21" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
