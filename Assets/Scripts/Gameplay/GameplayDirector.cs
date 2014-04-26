@@ -4,15 +4,14 @@ using System.Collections;
 public class GameplayDirector : MonoBehaviour {
 
   [SerializeField]
-  private Transform[]
-    levels;
+  private Transform[] levels;
   public int curLevelIndex = 0;
+
   [SerializeField]
-  private Transform
-    levelRoot;
+  private Transform levelRoot;
+
   [SerializeField]
-  private GameObject
-    gameOverUi;
+  private GameObject gameOverUi;
 
   // Use this for initialization
   void Start() {

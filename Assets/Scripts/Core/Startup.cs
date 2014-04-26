@@ -13,7 +13,13 @@ public class Startup : MonoBehaviour {
 
   void Update() {
     if(Input.anyKeyDown) {
-      Game.LoadScene(Game.Scenes.Game);
+      LoadGame();
     }
+  }
+
+  private void LoadGame() {
+    UkenTimer.SetTimeout(0.3f, () => {
+      Game.LoadScene(Game.Scenes.Game);
+    });
   }
 }
