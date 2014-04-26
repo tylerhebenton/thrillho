@@ -102,8 +102,9 @@ public class CarvalloController : MonoBehaviour {
       Debug.Log("JUMPING DOWN");
       if(!wasJumpingDown){
         Debug.Log("Upward Impulse");
-        rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,6);
         StartCoroutine(HopDown());
+        wasJumping = true;
+        headingDown = true;
       }
       wasJumpingDown = true;
     } else {
@@ -114,7 +115,7 @@ public class CarvalloController : MonoBehaviour {
 
   private IEnumerator HopDown(){
     footCollider.enabled = false;
-    yield return new WaitForSeconds(0.2f);
+    yield return new WaitForSeconds(0.05f);
     footCollider.enabled = true;
   }
 }
