@@ -15,5 +15,5 @@ MonoBehaviour:
   canShoot: 1
   numBullets: 3
   fireRate: 3
-  fireCooldown: 3.94000006
+  fireCooldown: 2.79999995
   bulletPrefab: {fileID: 100000, guid: 59ae4935427e44d2cad119423fb98e51, type: 2}
