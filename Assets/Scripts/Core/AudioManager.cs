@@ -9,19 +9,18 @@ public class AudioManager : MonoBehaviour {
 
   public static AudioManager Instance {
     get {
+      if(_instance == null) {
+        GameObject template = Resources.Load("Prefabs/Core/AudioManager") as GameObject;
+        GameObject am =  GameObject.Instantiate(template) as GameObject;
+        am.name = template.name;
+        _instance = am.GetComponent<AudioManager>();
+      }
+    
       return _instance;
     }
   }
 
 
-  // Use this for initialization
-  void Start() {
-    if(_instance != null) {
-      Destroy(this);
-    } else {
-      _instance = this;
-    }
-  }
   #endregion
 
   private static Dictionary<string,string> speakerMap = new Dictionary<string,string>{

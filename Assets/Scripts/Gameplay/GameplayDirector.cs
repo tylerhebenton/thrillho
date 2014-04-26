@@ -33,6 +33,9 @@ public class GameplayDirector : MonoBehaviour {
     curLevelIndex = 0;
     this.gameOverUi.SetActive(false);
 
+    //Just in case the game was launched directly into this scene
+    Game.Initialize();
+
     Lives = GameConfig.Instance.maxLives;
   }
 
@@ -83,8 +86,12 @@ public class GameplayDirector : MonoBehaviour {
 
   private void SpawnHero() {
     Debug.Log("Current Lives: " + Lives);
+
+    AudioManager.Instance.PlaySound("EpisodeVox/IAmCarvallo");
+
     Transform newHero = GameObject.Instantiate(heroPrefab, heroSpawnPoint.position, Quaternion.identity) as Transform;
     newHero.GetComponent<Hero>().GameplayDirector = this;
+    newHero.transform.parent = levelRoot.transform;
   }
 
   public void Kill(Hero hero) {
