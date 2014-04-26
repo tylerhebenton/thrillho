@@ -9,7 +9,11 @@ public class Startup : MonoBehaviour {
     Debug.Log("Welcome Thrillho!");
 
     //AudioManager.Instance.PlaySound("GamePlay/golf_clap");
+  }
 
-    Game.LoadScene(Game.Scenes.Game);
+  void Update() {
+    if(Input.anyKeyDown) {
+      Game.LoadScene(Game.Scenes.Game);
+    }
   }
 }

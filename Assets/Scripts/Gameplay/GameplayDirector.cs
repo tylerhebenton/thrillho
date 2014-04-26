@@ -4,15 +4,15 @@ using System.Collections;
 public class GameplayDirector : MonoBehaviour {
 
   [SerializeField]
-  private Transform[] levels;
-
+  private Transform[]
+    levels;
   public int curLevelIndex = 0;
-
   [SerializeField]
-  private Transform levelRoot;
-
+  private Transform
+    levelRoot;
   [SerializeField]
-  private GameObject gameOverUi;
+  private GameObject
+    gameOverUi;
 
   // Use this for initialization
   void Start() {
@@ -21,6 +21,11 @@ public class GameplayDirector : MonoBehaviour {
   }
 
   void Update() {
+
+    if(Input.GetKeyDown("escape")) {
+      Game.LoadScene(Game.Scenes.Startup);
+    }
+
     DebugControllsUpdate();
   }
 
@@ -48,7 +53,7 @@ public class GameplayDirector : MonoBehaviour {
       GameOver(true);
     } else if(index < 0) {
       //Goto start scene
-      Game.LoadScene(Game.Scenes.Start);
+      Game.LoadScene(Game.Scenes.Startup);
     } else {
       //Cleanup levels
       foreach(Transform child in levelRoot) {
