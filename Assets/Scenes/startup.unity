@@ -160,6 +160,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 336422845}
+  - 114: {fileID: 336422846}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -179,6 +180,18 @@ Transform:
   m_Children:
   - {fileID: 362557298}
   m_Father: {fileID: 1703635406}
+--- !u!114 &336422846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 2e96a62e568b743e089f65d7becf2e24,
+    type: 2}
+  m_PrefabInternal: {fileID: 1692709274}
+  m_GameObject: {fileID: 336422844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d4aa93e549304477958921e90b70f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &362557296
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,6 +201,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 362557298}
   - 82: {fileID: 362557297}
+  - 114: {fileID: 362557299}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -265,6 +279,25 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 336422845}
+--- !u!114 &362557299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 2e96a62e568b743e089f65d7becf2e24,
+    type: 2}
+  m_PrefabInternal: {fileID: 1692709274}
+  m_GameObject: {fileID: 362557296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c5ab96a2b9fb408abfce4c104cb94fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pitchVariance: 0
+  volumeVariance: 0
+  ambientLooping: 0
+  minLoopDelay: 2
+  maxLoopDelay: 10
+  loopPath: 
+  speakerType: 0
 --- !u!1 &1237728237
 GameObject:
   m_ObjectHideFlags: 0

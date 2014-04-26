@@ -4,7 +4,7 @@ using System.Collections;
 public static class Game {
 
   public enum Scenes {
-    Start,
+    Startup,
     Game
   }
 
