@@ -83,7 +83,7 @@ GameObject:
   - 61: {fileID: 6100004}
   - 114: {fileID: 11400002}
   m_Layer: 0
-  m_Name: KillVol2
+  m_Name: Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.28438711, y: .363613129, z: 0}
+  m_LocalPosition: {x: 12.0190907, y: -6.8973279, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -175,7 +175,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.24865341, y: -6.85398483, z: 0}
+  m_LocalPosition: {x: -.303903639, y: -6.67688942, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -404,10 +404,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 777db623cad6349e5abe4f50f8f5c74d, type: 3}
+  m_Script: {fileID: 11500000, guid: f5ef2dc876da84b9c8e1d5443b339998, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targets: 3
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
