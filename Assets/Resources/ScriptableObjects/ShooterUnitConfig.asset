@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: ShooterUnitConfig
   m_EditorClassIdentifier: 
   walkSpeed: 1
-  canShoot: 1
+  autoShoot: 1
   numBullets: 3
   fireRate: 3
   fireCooldown: .200000003
