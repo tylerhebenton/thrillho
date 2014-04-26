@@ -5,10 +5,6 @@ public class Startup : MonoBehaviour {
 
   void Start() {
     Game.Initialize();
-
-    Debug.Log("Welcome Thrillho!");
-
-    //AudioManager.Instance.PlaySound("GamePlay/golf_clap");
   }
 
   void Update() {
@@ -18,7 +14,9 @@ public class Startup : MonoBehaviour {
   }
 
   private void LoadGame() {
-    UkenTimer.SetTimeout(0.3f, () => {
+    AudioManager.Instance.PlaySound("EpisodeVox/ThrillhouseSHORT");
+
+    UkenTimer.SetTimeout(4f, () => {
       Game.LoadScene(Game.Scenes.Game);
     });
   }
