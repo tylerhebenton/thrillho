@@ -6,6 +6,7 @@ public class KillVolume : MonoBehaviour {
   public enum Targets {
     Heros,
     Monsters,
+    Bullets,
     All
   }
 
@@ -24,6 +25,13 @@ public class KillVolume : MonoBehaviour {
       Monster monster = collider.GetComponent<Monster>();
       if(monster) {
         monster.Die();
+      }
+    }
+
+    if(targets == Targets.Bullets || targets == Targets.All) {
+      Bullet bullet = collider.GetComponent<Bullet>();
+      if(bullet) {
+        GameObject.Destroy(bullet.gameObject);
       }
     }
 
