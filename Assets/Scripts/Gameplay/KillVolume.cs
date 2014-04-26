@@ -36,4 +36,12 @@ public class KillVolume : MonoBehaviour {
     }
 
   }
+
+  void OnDrawGizmos() {
+    Gizmos.color = Color.red;
+    BoxCollider2D boxCollider = this.GetComponent<BoxCollider2D>();
+    if(boxCollider) {
+      Gizmos.DrawWireCube(this.transform.position, new Vector3(boxCollider.size.x, boxCollider.size.y, 1f));
+    }
+  }
 }
