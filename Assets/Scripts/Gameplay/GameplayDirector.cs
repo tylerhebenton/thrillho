@@ -114,7 +114,7 @@ public class GameplayDirector : MonoBehaviour {
   private void SpawnHero() {
     Debug.Log("Current Lives: " + Lives);
 
-    Transform newHero = GameObject.Instantiate(heroPrefab, heroSpawnPoint.position, Quaternion.identity) as Transform;
+    Transform newHero = GameObject.Instantiate(heroPrefab, heroSpawnPoint.position + Vector3.back*10, Quaternion.identity) as Transform;
     Hero hero = newHero.GetComponent<Hero>();
     hero.GameplayDirector = this;
     newHero.transform.parent = levelRoot.transform;

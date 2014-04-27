@@ -45,7 +45,7 @@ public class CarvalloController : MonoBehaviour {
 
   public CameraController CameraController { get; set; }
 
-  private CarvalloAnimator animator;
+  public CarvalloAnimator animator;
 
 	void Start () {
 		initialGravity = rigidbody2D.gravityScale;
@@ -53,7 +53,6 @@ public class CarvalloController : MonoBehaviour {
     platformLayer = LayerMask.NameToLayer("platform");
     animator = this.GetComponent<CarvalloAnimator>();
     MeleeFired += animator.Attack1;
-    RangedFired += animator.Attack2;
 	}
 
   void Update() {
