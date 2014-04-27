@@ -118,6 +118,7 @@ public class GameplayDirector : MonoBehaviour {
     hero.ActivateRespawnInvincibility();
     newHero.transform.parent = levelRoot.transform;
     curHero = newHero.GetComponent<Hero>();
+    newHero.GetComponent<CarvalloController>().CameraController = this.mainCamera.GetComponent<CameraController>();
   }
 
   public void Kill(Hero hero) {
