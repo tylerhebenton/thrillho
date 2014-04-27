@@ -91,6 +91,7 @@ public class CarvalloController : MonoBehaviour {
 		if(jumping){
 			if(!wasJumping){
 				jumpStartTime = Time.time;
+        AudioManager.Instance.PlaySound("Gameplay/Jump");
 			}
 			if(Time.time - jumpStartTime < jumpHoldTime){
 				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,jumpSpeed);

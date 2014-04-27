@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour {
         GameObject am =  GameObject.Instantiate(template) as GameObject;
         am.name = template.name;
         _instance = am.GetComponent<AudioManager>();
+        GameObject.DontDestroyOnLoad(am);
       }
     
       return _instance;
