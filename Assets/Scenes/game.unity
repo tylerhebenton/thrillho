@@ -300,7 +300,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 696312444}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 6.5051651, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1075107558}
@@ -329,7 +329,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .427450985, g: .831372559, b: 1, a: .0196078438}
+  m_BackGroundColor: {r: .0745098069, g: .0784313753, b: .117647059, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -918,6 +918,7 @@ MonoBehaviour:
   levels:
   - {fileID: 400088, guid: c19eb29f0a66849d4bdf5b479916af2a, type: 2}
   - {fileID: 400060, guid: 5cb621cd1c3bd483b92e5781f96886ef, type: 2}
+  - {fileID: 400132, guid: 5165a96e5e0b84171bdcaae4adc327a9, type: 2}
   curLevelIndex: 0
   levelRoot: {fileID: 1491709532}
   heroPrefab: {fileID: 400000, guid: 4b15c2c96648045bdbe3885f4d589e53, type: 2}
