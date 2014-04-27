@@ -10,6 +10,9 @@ public static class Game {
 
   public static void Initialize() {
     //Initialize app level stuff here
+
+    //Bake AudioManager so there's an audio listener in the scene
+    AudioManager bakedAudioManager = AudioManager.Instance;
   }
 
   public static void LoadScene(Game.Scenes scene) {

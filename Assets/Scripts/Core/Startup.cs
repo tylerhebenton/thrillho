@@ -22,7 +22,7 @@ public class Startup : MonoBehaviour {
   }
 
   private void LoadGame() {
-    AudioManager.Instance.PlaySound("EpisodeVox/ThrillhouseSHORT");
+    AudioManager.Instance.PlaySound("Title/ThrillhouseSHORT2");
     splashUi.SetActive(true);
 
     UkenTimer.SetTimeout(4f, () => {
