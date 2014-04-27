@@ -2266,6 +2266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runAcceleration: 5000
+  horizontalJumpAcceleration: 1000
   walkTopSpeed: 3.5
   runTopSpeed: 9
   kineticFriction: .800000012

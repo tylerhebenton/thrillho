@@ -11,6 +11,11 @@ public class CarvalloAttack : MonoBehaviour {
   private GameObject bulletPrefab;
   [SerializeField]
   private float speed;
+  [SerializeField]
+  private Vector3 spawnOffset;
+  [SerializeField]
+  private float cooldown;
+  private float shotTime;
 
   private List<Monster> monstersInRange = new List<Monster>();
   private List<Bullet> bulletsInRange = new List<Bullet>();
@@ -73,10 +78,14 @@ public class CarvalloAttack : MonoBehaviour {
   }
 
   void Ranged(float horizontal, float vertical){
-    GameObject bulletGO = GameObject.Instantiate(bulletPrefab,transform.position,transform.rotation) as GameObject;
+    if(Time.time - shotTime < cooldown){
+      return;
+    }
+    shotTime = Time.time;
+    GameObject bulletGO = GameObject.Instantiate(bulletPrefab,transform.position+spawnOffset,transform.rotation) as GameObject;
     Bullet bullet = bulletGO.GetComponent<Bullet>();
     if(Mathf.Abs(horizontal) < 0.1f && Mathf.Abs(vertical) < 0.1f){
-      bullet.velocity = transform.right * speed;
+      bullet.velocity = Mathf.Sign(transform.lossyScale.x)*transform.right * speed;
     } else {
       bullet.velocity = new Vector3(horizontal, -vertical, 0).normalized*speed;
     }
