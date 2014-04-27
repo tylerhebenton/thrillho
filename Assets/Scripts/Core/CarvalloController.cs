@@ -52,14 +52,13 @@ public class CarvalloController : MonoBehaviour {
     footLayer = LayerMask.NameToLayer("foot");
     platformLayer = LayerMask.NameToLayer("platform");
     animator = this.GetComponent<CarvalloAnimator>();
+    MeleeFired += animator.Attack1;
+    RangedFired += animator.Attack2;
 	}
 
   void Update() {
     if(CameraController) {
       CameraController.FollowCharacterPosition(this.transform.position);
-    }
-    if(animator) {
-      //animator.ValuesUpdate(this);
     }
   }
 	

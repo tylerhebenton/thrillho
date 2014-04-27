@@ -31,16 +31,18 @@ public class CarvalloAnimator : MonoBehaviour {
   }
 
   public void SetVelocity(Vector2 vel) {
-    rigAnimator.SetFloat("velocityX", vel.x);
-    rigAnimator.SetFloat("velocityY", vel.y);
+    if(rigAnimator) {
+      rigAnimator.SetFloat("velocityX", vel.x);
+      rigAnimator.SetFloat("velocityY", vel.y);
+    }
   }
 
 
-  public void Attack1() {
+  public void Attack1(float x=0f, float y=0f) {
     rigAnimator.SetTrigger("attack1");
   }
 
-  public void Attack2() {
+  public void Attack2(float x=0f, float y=0f) {
     rigAnimator.SetTrigger("attack2");
   }
 
