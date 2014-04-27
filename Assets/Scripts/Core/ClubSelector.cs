@@ -3,11 +3,28 @@ using System.Collections;
 
 public class ClubSelector : MonoBehaviour {
 
+  [SerializeField]
+  private GameObject dialogue;
+
+  [SerializeField]
+  private GameObject clubSelectUi;
+
+  [SerializeField]
+  private GameObject[] clubSprites;
+
   bool acceptingInput = false;
+  private int clubIndex = 300;
+
 	// Use this for initialization
 	void Start () {
     Game.Initialize();
     acceptingInput = false;
+
+    clubSelectUi.SetActive(false);
+
+
+    dialogue.SetActive(true);
+
 
     UkenTimer.SetTimeout(3f, () => {
       AudioManager.Instance.PlaySound("EpisodeVox/IAmCarvallo");
@@ -15,6 +32,7 @@ public class ClubSelector : MonoBehaviour {
         AudioManager.Instance.PlaySound("EpisodeVox/ChooseAClub");
         UkenTimer.SetTimeout(2f, () => {
           acceptingInput = true;
+          clubSelectUi.SetActive(true);
         });
       });
     });
@@ -22,16 +40,40 @@ public class ClubSelector : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-    if(acceptingInput && Input.anyKeyDown) {
+    for(int i = 0; i < clubSprites.Length; i++) {
+      clubSprites[i].SetActive(ValidIndex == i);
+    }
+    if(Input.GetKeyDown("left")) {
+      Left();
+    } else if(Input.GetKeyDown("right")) {
+      Right();
+    } else if(acceptingInput && Input.anyKeyDown) {
       SelectClub();
       acceptingInput = false;
     }
 	}
 
+  private int ValidIndex {
+    get {
+      return clubIndex % clubSprites.Length;
+    }
+  }
+
+  public void Left() {
+    clubIndex -= 1;
+    AudioManager.Instance.PlaySound("UI/Scroll");
+  }
+
+  public void Right() {
+    clubIndex += 1;
+    AudioManager.Instance.PlaySound("UI/Scroll");
+  }
   
   private void SelectClub() {
-    AudioManager.Instance.PlaySound("EpisodeVox/YouHaveChosen3wood");
-    
+    AudioManager.Instance.PlayClip(GameConfig.Instance.clubSelectSounds[ValidIndex]);
+
+    Game.ClubPrefab = GameConfig.Instance.clubPrefabs[ValidIndex];
+
     UkenTimer.SetTimeout(4f, () => {
       Game.LoadScene(Game.Scenes.Game);
     });

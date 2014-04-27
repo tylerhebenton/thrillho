@@ -22,6 +22,8 @@ public static class Game {
     }
   }
 
+  public static GameObject ClubPrefab { set; get; }
+
   public static void LoadScene(Game.Scenes scene) {
     Application.LoadLevel(scene.ToString().ToLower());
   }
