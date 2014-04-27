@@ -70,7 +70,11 @@ public class CarvalloAttack : MonoBehaviour {
   void Ranged(float horizontal, float vertical){
     GameObject bulletGO = GameObject.Instantiate(bulletPrefab,transform.position,transform.rotation) as GameObject;
     Bullet bullet = bulletGO.GetComponent<Bullet>();
-    bullet.velocity = new Vector3(horizontal, -vertical, 0).normalized*speed;
+    if(Mathf.Abs(horizontal) < 0.1f && Mathf.Abs(vertical) < 0.1f){
+      bullet.velocity = transform.forward * speed;
+    } else {
+      bullet.velocity = new Vector3(horizontal, -vertical, 0).normalized*speed;
+    }
   }
 
   void OnTriggerEnter2D(Collider2D collider){
