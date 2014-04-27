@@ -65,12 +65,19 @@ public class CarvalloAttack : MonoBehaviour {
     foreach (Bullet b in bulletsToRemove){
       bulletsInRange.Remove(b);
     }
+    if(bulletsToRemove.Count > 0) {
+      AudioManager.Instance.PlaySound("Gameplay/HitEnemyBullet");
+    } else {
+      AudioManager.Instance.PlaySound("Gameplay/GolfSwing");
+    }
   }
 
   void Ranged(float horizontal, float vertical){
     GameObject bulletGO = GameObject.Instantiate(bulletPrefab,transform.position,transform.rotation) as GameObject;
     Bullet bullet = bulletGO.GetComponent<Bullet>();
     bullet.velocity = new Vector3(horizontal, -vertical, 0).normalized*speed;
+
+    AudioManager.Instance.PlaySound("Gameplay/HitEnemyBullet");
   }
 
   void OnTriggerEnter2D(Collider2D collider){
