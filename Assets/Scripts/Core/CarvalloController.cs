@@ -70,6 +70,10 @@ public class CarvalloController : MonoBehaviour {
     FixedJump(horizontal,vertical);
     FixedRun(horizontal,vertical);
     FixedAttack(horizontal,vertical);
+
+    if(animator) {
+      animator.SetVelocity(rigidbody2D.velocity);
+    }
 	}
   
   void FixedCustomPhysics(float horizontal, float vertical){

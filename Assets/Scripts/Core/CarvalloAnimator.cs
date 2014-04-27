@@ -30,9 +30,9 @@ public class CarvalloAnimator : MonoBehaviour {
     }
   }
 
-  public void SetVelocity(float x, float y) {
-    rigAnimator.SetFloat("velocityX", x);
-    rigAnimator.SetFloat("velocityY", y);
+  public void SetVelocity(Vector2 vel) {
+    rigAnimator.SetFloat("velocityX", vel.x);
+    rigAnimator.SetFloat("velocityY", vel.y);
   }
 
 
