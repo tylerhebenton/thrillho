@@ -5,14 +5,20 @@ public static class Game {
 
   public enum Scenes {
     Startup,
-    Game
+    Game,
+    Welcome
   }
 
+
+  private static bool initialized = false;
   public static void Initialize() {
     //Initialize app level stuff here
+    if(initialized == false) {
+      initialized = true;
 
-    //Bake AudioManager so there's an audio listener in the scene
-    AudioManager bakedAudioManager = AudioManager.Instance;
+      //Bake AudioManager so there's an audio listener in the scene
+      AudioManager bakedAudioManager = AudioManager.Instance;
+    }
   }
 
   public static void LoadScene(Game.Scenes scene) {
