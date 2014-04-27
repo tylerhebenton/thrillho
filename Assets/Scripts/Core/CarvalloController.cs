@@ -65,10 +65,10 @@ public class CarvalloController : MonoBehaviour {
   void FixedUpdate () {
     float horizontal = Input.GetAxis(InputAxes.HORIZONTAL);
     float vertical = Input.GetAxis(InputAxes.VERTICAL);
-    FixedCustomPhysics(horizontal,vertical);
     FixedJump(horizontal,vertical);
     FixedRun(horizontal,vertical);
     FixedAttack(horizontal,vertical);
+    FixedCustomPhysics(horizontal,vertical);
 
     if(animator) {
       animator.SetVelocity(rigidbody2D.velocity);
@@ -76,7 +76,7 @@ public class CarvalloController : MonoBehaviour {
 	}
   
   void FixedCustomPhysics(float horizontal, float vertical){
-    Physics2D.IgnoreLayerCollision(footLayer,platformLayer, rigidbody2D.velocity.y > 0);
+    Physics2D.IgnoreLayerCollision(footLayer,platformLayer, !headingDown && !grounded);
   }
 
   void FixedRun(float horizontal, float vertical){
