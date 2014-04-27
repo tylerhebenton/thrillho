@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 69afa45b0ddb5420f8e9c659e272e6af, type: 3}
   - {fileID: 8300000, guid: 98ce152ff82fd459e940d363d79d7a7b, type: 3}
   - {fileID: 8300000, guid: a7301758afd794b47827602d95374a4f, type: 3}
+  followCameraY: 1

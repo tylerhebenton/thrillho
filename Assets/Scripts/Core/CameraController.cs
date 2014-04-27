@@ -7,12 +7,16 @@ public class CameraController : MonoBehaviour {
   private float orthoSize;
 
   private float maxX = 0f;
+  private Vector3 source;
+  private Vector3 target;
 
 	// Use this for initialization
 	void Start () {
     initialPosition = transform.position;
     orthoSize = Camera.main.orthographicSize;
     maxX = transform.position.x;
+    source = initialPosition;
+    target = initialPosition;
 	}
 	
 	// Update is called once per frame
@@ -26,7 +30,18 @@ public class CameraController : MonoBehaviour {
     if(curWaypoint != null && curWaypoint.camMode == CameraWaypoint.CamModes.Follow && heroPosition.x > maxX) {
       maxX = heroPosition.x;
       //TODO follow along the line towards the next waypoint, not just snapped on Y using maxX
-      this.transform.position = new Vector3(maxX, this.transform.position.y, this.transform.position.z);
+      if(maxX > target.x) {
+        NextWaypoint();
+      } else {
+        float completexX = maxX - source.x;
+        float pctCompl = completexX / (target.x - source.x);
+        float yPos = (pctCompl * (target.y - source.y)) + source.y;
+        if(GameConfig.Instance.followCameraY == false) {
+          yPos = this.transform.position.y;
+        }
+
+        this.transform.position = new Vector3(maxX, yPos, this.transform.position.z);
+      }
     }
   }
 
@@ -37,7 +52,7 @@ public class CameraController : MonoBehaviour {
     curLevel = level;
     Go.killAllTweensWithTarget(this.transform);
     this.transform.position = initialPosition;
-    if(level.waypoints.Length > 0) {
+    if(level.waypoints != null && level.waypoints.Length > 0) {
       curWaypointIndex = 0;
       HaltThenGotoWaypoint();
     }
@@ -45,16 +60,18 @@ public class CameraController : MonoBehaviour {
 
   public void HaltThenGotoWaypoint() {
     Go.killAllTweensWithTarget(this.transform);
-    UkenTimer.SetTimeout(3f, () => {
+    UkenTimer.SetTimeout(0f, () => {
       curWaypointIndex -= 1;
       NextWaypoint();
     });
   }
 
   public void GoToWaypoint(CameraWaypoint waypoint) {
+    source = this.transform.position;
+    target = waypoint.transform.position;
     curWaypoint = waypoint;
     if(waypoint.camMode == CameraWaypoint.CamModes.Auto) {
-      float delta = (transform.position - waypoint.transform.position).magnitude;
+      float delta = (source - target).magnitude;
       float timeToTarget = delta / waypoint.speed;
       Go.to(this.transform, timeToTarget, new GoTweenConfig().position(waypoint.transform.position).onComplete((_) => {
         NextWaypoint();
@@ -67,5 +84,10 @@ public class CameraController : MonoBehaviour {
     if(curWaypointIndex < curLevel.waypoints.Length) {
       GoToWaypoint(curLevel.waypoints[curWaypointIndex]);
     }
+  }
+
+  void OnDrawGizmos() {
+    Gizmos.color = Color.green;
+    Gizmos.DrawLine(source, target);
   }
 }
