@@ -21,7 +21,6 @@ public class Hero : Unit {
 
   public override void Die() {
     if(invincible){
-      Debug.Log("Too invincible to die");
       return;
     }
     if(GameplayDirector != null){
