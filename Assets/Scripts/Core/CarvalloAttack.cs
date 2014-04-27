@@ -20,10 +20,7 @@ public class CarvalloAttack : MonoBehaviour {
   private List<Monster> monstersInRange = new List<Monster>();
   private List<Bullet> bulletsInRange = new List<Bullet>();
 
-  private BoxCollider2D boxCollider;
-
   void Start(){
-    boxCollider = GetComponent<BoxCollider2D>();
     controller.MeleeFired += Melee;
     controller.RangedFired += Ranged;
   }
@@ -82,6 +79,7 @@ public class CarvalloAttack : MonoBehaviour {
       return;
     }
     shotTime = Time.time;
+    controller.animator.Attack2(horizontal,vertical);
     GameObject bulletGO = GameObject.Instantiate(bulletPrefab,transform.position+spawnOffset,transform.rotation) as GameObject;
     Bullet bullet = bulletGO.GetComponent<Bullet>();
     if(Mathf.Abs(horizontal) < 0.1f && Mathf.Abs(vertical) < 0.1f){
