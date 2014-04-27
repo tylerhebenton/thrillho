@@ -36,7 +36,9 @@ public class CameraController : MonoBehaviour {
         float completexX = maxX - source.x;
         float pctCompl = completexX / (target.x - source.x);
         float yPos = (pctCompl * (target.y - source.y)) + source.y;
-        //yPos = this.transform.position.y;
+        if(GameConfig.Instance.followCameraY == false) {
+          yPos = this.transform.position.y;
+        }
 
         this.transform.position = new Vector3(maxX, yPos, this.transform.position.z);
       }
