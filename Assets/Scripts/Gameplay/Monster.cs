@@ -11,7 +11,7 @@ public class Monster : Unit {
 
   public MonsterStates state = MonsterStates.Idle;
 
-  void Update() {
+  public override void Update() {
     if(state == MonsterStates.Aggro) {
       FireUpdate();
     }

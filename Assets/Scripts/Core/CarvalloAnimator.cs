@@ -3,10 +3,10 @@ using System.Collections;
 
 [RequireComponent (typeof(Hero))]
 public class CarvalloAnimator : MonoBehaviour {
+  
+  public SpriteRenderer model;
 
   private Hero hero;
-  [SerializeField]
-  private SpriteRenderer model;
   private Vector3 originalModelScale;
 
   void Start(){

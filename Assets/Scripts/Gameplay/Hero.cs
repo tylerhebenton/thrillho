@@ -5,9 +5,12 @@ public class Hero : Unit {
 
   private const float MAX_DISTANCE_BELLOW = 50f;
 
+  private bool invincible = false;
+
   public GameplayDirector GameplayDirector { get; set; }
 
-  void Update() {
+  public override void Update() {
+    base.Update();
     if(GameplayDirector && GameplayDirector.mainCamera) {
       Vector3 delta = GameplayDirector.mainCamera.transform.position - this.transform.position;
       if(delta.y > MAX_DISTANCE_BELLOW) {
@@ -17,7 +20,12 @@ public class Hero : Unit {
   }
 
   public override void Die() {
-    GameplayDirector.Kill(this);
+    if(invincible){
+      return;
+    }
+    if(GameplayDirector != null){
+      GameplayDirector.Kill(this);
+    }
     base.Die();
   }
 
@@ -37,6 +45,20 @@ public class Hero : Unit {
       GameObject.Destroy(bullet.gameObject);
       this.Die();
     }
-    
+  }
+
+  public void ActivateRespawnInvincibility(){
+    StartCoroutine(RespawnInternal());
+  }
+  
+  private IEnumerator RespawnInternal(){
+    invincible = true;
+    CarvalloAnimator ca = GetComponent<CarvalloAnimator>();
+    for(int i = 0; i < 50; ++i){
+      ca.model.gameObject.SetActive(!ca.model.gameObject.activeInHierarchy);
+      yield return new WaitForSeconds(0.02f);
+    }
+    ca.model.gameObject.SetActive(true);
+    invincible = false;
   }
 }
