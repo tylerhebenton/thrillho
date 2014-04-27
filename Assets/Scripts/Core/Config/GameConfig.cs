@@ -15,6 +15,8 @@ public class GameConfig : ScriptableObject {
   [SerializeField]
   public AudioClip[] clubSelectSounds;
 
+  public bool followCameraY = true;
+
   private static GameConfig _instance = null;
   public static GameConfig Instance {
     get {
