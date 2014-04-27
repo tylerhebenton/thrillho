@@ -21,6 +21,11 @@ public class CarvalloAnimator : MonoBehaviour {
     rig.transform.parent = model.transform;
     rig.transform.localScale = Vector3.one;
     rigAnimator = rig.GetComponent<Animator>();
+
+    GameObject weaponMount = rig.FindChildRecursive("R_weapon");
+    GameObject club = GameObject.Instantiate(Game.ClubPrefab, weaponMount.transform.position, Quaternion.identity) as GameObject;
+    club.transform.parent = weaponMount.transform;
+    club.transform.localScale = Vector3.one;
   }
 
   void Update(){

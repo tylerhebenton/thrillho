@@ -57,6 +57,10 @@ public class AudioManager : MonoBehaviour {
     speaker.PlaySound(clip);
   }
 
+  public void PlayClip(AudioClip clip) {
+    FindSpeaker("Main").GetComponent<SpeakerExtension>().PlaySound(clip);
+  }
+
   public static AudioClip RandomAudioClip(string soundName) {
     AudioClip clip = null;
     string soundPath = "Sound/" + soundName;

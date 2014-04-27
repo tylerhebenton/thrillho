@@ -13,3 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLives: 6
   cameraDelayOnDeath: 2
+  clubPrefabs:
+  - {fileID: 100000, guid: 11c265149a0f947cca7b9d17e58fa695, type: 2}
+  - {fileID: 100000, guid: 858a4650ea5564eee973b2014676ef4b, type: 2}
+  - {fileID: 100000, guid: 15a8aa7bd8dfc4b1bbfdf6d5e83493a6, type: 2}
+  clubSelectSounds:
+  - {fileID: 8300000, guid: 69afa45b0ddb5420f8e9c659e272e6af, type: 3}
+  - {fileID: 8300000, guid: 98ce152ff82fd459e940d363d79d7a7b, type: 3}
+  - {fileID: 8300000, guid: a7301758afd794b47827602d95374a4f, type: 3}
