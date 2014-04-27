@@ -25,7 +25,19 @@ public class CarvalloAttack : MonoBehaviour {
     controller.RangedFired += Ranged;
   }
 
+  private bool attacking = false;
+
+  void OnDrawGizmos() {
+    if(attacking) {
+      Gizmos.color = Color.yellow;
+      BoxCollider2D boxCollider = this.GetComponent<BoxCollider2D>();
+      Gizmos.DrawWireCube(this.transform.position, new Vector3(boxCollider.size.x, boxCollider.size.y, 3f));
+      attacking = false; //this is hack, but we only calc this in one frame
+    }
+  }
+
   void Melee(float horizontal, float vertical){
+    attacking = true;
     List<Monster> monstersToRemove = new List<Monster>();
     foreach(Monster monster in monstersInRange){
       if(monster == null){
