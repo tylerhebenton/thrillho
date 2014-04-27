@@ -26,16 +26,21 @@ public class CarvalloAnimator : MonoBehaviour {
     }
 
     GameObject weaponMount = rig.FindChildRecursive("R_weapon");
-    GameObject club = null;
-    if(Game.ClubPrefab != null){
-      club = GameObject.Instantiate(Game.ClubPrefab, weaponMount.transform.position, Quaternion.identity) as GameObject;
+    if(Game.ClubPrefab != null && weaponMount != null){
+      GameObject club = GameObject.Instantiate(Game.ClubPrefab, weaponMount.transform.position, Quaternion.identity) as GameObject;
+      club.transform.parent = weaponMount.transform;
+      club.transform.localScale = Vector3.one;
     }
-    if(club != null){
+    
+    //Spawn a second weapon for animation, only one is visible at a time
+    GameObject weaponMount2 = rig.FindChildRecursive("R_weapon2");
+    if(Game.ClubPrefab != null && weaponMount2 != null) {
+      GameObject club = GameObject.Instantiate(Game.ClubPrefab, weaponMount.transform.position, Quaternion.identity) as GameObject;
       club.transform.parent = weaponMount.transform;
       club.transform.localScale = Vector3.one;
     }
   }
-
+  
   void Update(){
     float facingX = (hero.direction == Unit.Directions.Right) ? 1 : -1;
     if(model) {
