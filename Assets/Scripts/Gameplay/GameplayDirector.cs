@@ -117,10 +117,10 @@ public class GameplayDirector : MonoBehaviour {
     Transform newHero = GameObject.Instantiate(heroPrefab, heroSpawnPoint.position, Quaternion.identity) as Transform;
     Hero hero = newHero.GetComponent<Hero>();
     hero.GameplayDirector = this;
-    hero.ActivateRespawnInvincibility();
     newHero.transform.parent = levelRoot.transform;
     curHero = newHero.GetComponent<Hero>();
     newHero.GetComponent<CarvalloController>().CameraController = this.mainCamera.GetComponent<CameraController>();
+    hero.ActivateRespawnInvincibility();
   }
 
   public void Kill(Hero hero) {
