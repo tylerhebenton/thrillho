@@ -112,8 +112,6 @@ public class GameplayDirector : MonoBehaviour {
   private void SpawnHero() {
     Debug.Log("Current Lives: " + Lives);
 
-    AudioManager.Instance.PlaySound("EpisodeVox/IAmCarvallo");
-
     Transform newHero = GameObject.Instantiate(heroPrefab, heroSpawnPoint.position, Quaternion.identity) as Transform;
     Hero hero = newHero.GetComponent<Hero>();
     hero.GameplayDirector = this;

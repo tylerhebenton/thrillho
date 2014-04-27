@@ -26,7 +26,7 @@ public class Startup : MonoBehaviour {
     splashUi.SetActive(true);
 
     UkenTimer.SetTimeout(4f, () => {
-      Game.LoadScene(Game.Scenes.Game);
+      Game.LoadScene(Game.Scenes.Welcome);
     });
   }
 }
