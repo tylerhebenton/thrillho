@@ -8,6 +8,8 @@ public class CarvalloController : MonoBehaviour {
 
 	[SerializeField]
 	private float runAcceleration;
+  [SerializeField]
+  private float horizontalJumpAcceleration;
 	[SerializeField]
 	private float walkTopSpeed;
 	[SerializeField]
@@ -27,13 +29,14 @@ public class CarvalloController : MonoBehaviour {
 	[Range(1,2)]
 	private float jumpFallGravityAccel;
 	private float jumpStartTime = 0;
-	private bool wasJumping = false;
 	private bool headingDown = false;
 
   [SerializeField]
   private BoxCollider2D footCollider;
 
   private bool wasJumpingDown = false;
+  private bool grounded = false;
+  private bool jumpLetGo = true;
 
 	private float initialGravity;
 
@@ -42,10 +45,15 @@ public class CarvalloController : MonoBehaviour {
 
   public CameraController CameraController { get; set; }
 
+  private CarvalloAnimator animator;
+
 	void Start () {
 		initialGravity = rigidbody2D.gravityScale;
     footLayer = LayerMask.NameToLayer("foot");
     platformLayer = LayerMask.NameToLayer("platform");
+    animator = this.GetComponent<CarvalloAnimator>();
+    MeleeFired += animator.Attack1;
+    RangedFired += animator.Attack2;
 	}
 
   void Update() {
@@ -61,30 +69,28 @@ public class CarvalloController : MonoBehaviour {
     FixedJump(horizontal,vertical);
     FixedRun(horizontal,vertical);
     FixedAttack(horizontal,vertical);
+
+    if(animator) {
+      animator.SetVelocity(rigidbody2D.velocity);
+    }
 	}
   
   void FixedCustomPhysics(float horizontal, float vertical){
-    bool jumpingDown = (Input.GetButton(InputAxes.JUMP) && vertical > 0.7f);
-    if(jumpingDown){
-      if(!wasJumpingDown){
-        StartCoroutine(HopDown());
-        wasJumping = true;
-        headingDown = true;
-      }
-      wasJumpingDown = true;
-    } else {
-      wasJumpingDown = false;
-    }
     Physics2D.IgnoreLayerCollision(footLayer,platformLayer, rigidbody2D.velocity.y > 0);
   }
 
   void FixedRun(float horizontal, float vertical){
 		bool running = Input.GetButton(InputAxes.RUN);
-		float topSpeed = running ? runTopSpeed * horizontal : walkTopSpeed * horizontal;
-		if(horizontal != 0){
-			rigidbody2D.AddForce(runAcceleration * horizontal * Time.fixedDeltaTime * transform.right);
+    bool locked = Input.GetButton(InputAxes.LOCK);
+		float topSpeed = running ? runTopSpeed : walkTopSpeed;
+		if(horizontal != 0 && !locked){
+      if(grounded){
+  			rigidbody2D.AddForce(runAcceleration * horizontal * Time.fixedDeltaTime * transform.right);
+      } else {
+        rigidbody2D.AddForce(horizontalJumpAcceleration * horizontal * Time.fixedDeltaTime * transform.right);
+      }
 			if(Mathf.Abs(rigidbody2D.velocity.x) > topSpeed){
-				rigidbody2D.velocity = new Vector2(topSpeed,rigidbody2D.velocity.y);
+				rigidbody2D.velocity = new Vector2(topSpeed*horizontal,rigidbody2D.velocity.y);
 			}
 		} else {
 			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x*kineticFriction,rigidbody2D.velocity.y);
@@ -97,29 +103,44 @@ public class CarvalloController : MonoBehaviour {
   void FixedJump(float horizontal, float vertical){
     bool jumping = (Input.GetButton(InputAxes.JUMP) && vertical <= 0.7f);
 		if(jumping){
-			if(!wasJumping){
+			if(grounded && jumpLetGo){
 				jumpStartTime = Time.time;
         AudioManager.Instance.PlaySound("Gameplay/Jump");
+        animator.Jump();
+        jumpLetGo = false;
+        grounded = false;
 			}
 			if(Time.time - jumpStartTime < jumpHoldTime){
 				rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x,jumpSpeed);
 			}
-			wasJumping = true;
     } else {
       jumpStartTime = 0;
+      jumpLetGo = true;
     }
-		if(wasJumping){
+		if(!grounded){
 			if(rigidbody2D.velocity.y < 0){
 				headingDown = true;
 			}
 		}
 		if(headingDown){
 			rigidbody2D.gravityScale *= jumpFallGravityAccel;
-			if(rigidbody2D.velocity.y >= 0 && !jumping){
+			if(rigidbody2D.velocity.y >= 0){
 				rigidbody2D.gravityScale = initialGravity;
 				headingDown = false;
-				wasJumping = false;
+        grounded = true;
+        animator.Grounded();
 			}
+    }
+    bool jumpingDown = (Input.GetButton(InputAxes.JUMP) && vertical > 0.7f);
+    if(jumpingDown){
+      if(!wasJumpingDown){
+        StartCoroutine(HopDown());
+        grounded = false;
+        headingDown = true;
+      }
+      wasJumpingDown = true;
+    } else {
+      wasJumpingDown = false;
     }
 	}
 
@@ -127,7 +148,7 @@ public class CarvalloController : MonoBehaviour {
     if(Input.GetButtonDown(InputAxes.ATTACK_MELEE)){
       MeleeFired(horizontal,vertical);
     }
-    if(Input.GetButtonDown(InputAxes.ATTACK_RANGED)){
+    if(Input.GetButton(InputAxes.ATTACK_RANGED)){
       RangedFired(horizontal,vertical);
     }
   }

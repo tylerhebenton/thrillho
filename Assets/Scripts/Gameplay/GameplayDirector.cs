@@ -57,6 +57,8 @@ public class GameplayDirector : MonoBehaviour {
     Game.Initialize();
 
     Lives = GameConfig.Instance.maxLives;
+
+    AudioManager.Instance.PlayMusic();
   }
   
   void Update() {
@@ -128,8 +130,10 @@ public class GameplayDirector : MonoBehaviour {
     } else {
       //Respawn
       Lives = curLives;
+
       SpawnHero();
       mainCamera.GetComponent<CameraController>().HaltThenGotoWaypoint();
+      AudioManager.Instance.PlaySound("Gameplay/RespawnC");
     }
   }
 
@@ -138,7 +142,7 @@ public class GameplayDirector : MonoBehaviour {
   /// </summary>
   /// <param name="win">If set to <c>true</c> window.</param>
   public void GameOver(bool win) {
-
+    AudioManager.Instance.StopMusic();
     if(win) {
       Debug.Log("YOU A WINNA");
     } else {
