@@ -9,13 +9,16 @@ public class Startup : MonoBehaviour {
   [SerializeField]
   private GameObject splashUi;
 
+  private bool acceptingInput = false;
 
   void Start() {
     Game.Initialize();
+    acceptingInput = true;
   }
 
   void Update() {
-    if(Input.anyKeyDown) {
+    if(acceptingInput && Input.anyKeyDown) {
+      acceptingInput = false;
       tapToStartUi.SetActive(false);
       LoadGame();
     }

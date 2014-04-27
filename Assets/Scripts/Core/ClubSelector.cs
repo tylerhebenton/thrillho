@@ -7,6 +7,7 @@ public class ClubSelector : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
     Game.Initialize();
+    acceptingInput = false;
 
     UkenTimer.SetTimeout(3f, () => {
       AudioManager.Instance.PlaySound("EpisodeVox/IAmCarvallo");
