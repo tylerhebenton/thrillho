@@ -4,29 +4,42 @@ using System.Collections;
 public class GameplayDirector : MonoBehaviour {
 
   [SerializeField]
-  private Transform[]
-    levels;
+  private Transform[] levels;
   public int curLevelIndex = 0;
+
   [SerializeField]
-  private Transform
-    levelRoot;
+  private Transform levelRoot;
+
   [SerializeField]
-  private Transform
-    heroPrefab;
+  private Transform heroPrefab;
+
   [SerializeField]
-  private Transform
-    heroSpawnPoint;
+  private Transform heroSpawnPoint;
+
   [SerializeField]
-  public GameObject
-    mainCamera;
+  public GameObject mainCamera;
+
 
   #region UI
   [SerializeField]
-  private GameObject
-    gameOverUi;
+  private GameObject gameOverUi;
+
+  [SerializeField]
+  ScoreCounter scoreUi;
   #endregion
 
-  public int Lives { get; set; }
+  private int lives = 0;
+  public int Lives {
+    get {
+      return lives;
+    }
+    set {
+      lives = value;
+      if(scoreUi) {
+        scoreUi.SetScore(lives);
+      }
+    }
+  }
 
   private Hero curHero = null;
 
