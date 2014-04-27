@@ -44,17 +44,17 @@ public class CarvalloAttack : MonoBehaviour {
       if(bullet.GetType() != bulletPrefab.GetType()){
         if(bullet.transform.position.x > controller.transform.position.x
            && bullet.velocity.x < 0){
-          bullet.velocity = new Vector3(-bullet.velocity.x, bullet.velocity.y, bullet.velocity.z);
+          bullet.velocity = new Vector3(-bullet.velocity.x*3, bullet.velocity.y*3, bullet.velocity.z);
         } else if(bullet.transform.position.x < controller.transform.position.x
                   && bullet.velocity.x > 0){
-          bullet.velocity = new Vector3(-bullet.velocity.x, bullet.velocity.y, bullet.velocity.z);
+          bullet.velocity = new Vector3(-bullet.velocity.x*3, bullet.velocity.y*3, bullet.velocity.z);
         }
         if(bullet.transform.position.y > controller.transform.position.y
            && bullet.velocity.y < 0){
-          bullet.velocity = new Vector3(bullet.velocity.x, -bullet.velocity.y, bullet.velocity.z);
+          bullet.velocity = new Vector3(bullet.velocity.x*3, -bullet.velocity.y*3, bullet.velocity.z);
         } else if(bullet.transform.position.y < controller.transform.position.y
                   && bullet.velocity.y > 0){
-          bullet.velocity = new Vector3(bullet.velocity.x, -bullet.velocity.y, bullet.velocity.z);
+          bullet.velocity = new Vector3(bullet.velocity.x*3, -bullet.velocity.y*3, bullet.velocity.z);
         }
         KillVolume kv = bullet.GetComponent<KillVolume>();
         if(kv){
@@ -75,8 +75,11 @@ public class CarvalloAttack : MonoBehaviour {
   void Ranged(float horizontal, float vertical){
     GameObject bulletGO = GameObject.Instantiate(bulletPrefab,transform.position,transform.rotation) as GameObject;
     Bullet bullet = bulletGO.GetComponent<Bullet>();
-    bullet.velocity = new Vector3(horizontal, -vertical, 0).normalized*speed;
-
+    if(Mathf.Abs(horizontal) < 0.1f && Mathf.Abs(vertical) < 0.1f){
+      bullet.velocity = transform.right * speed;
+    } else {
+      bullet.velocity = new Vector3(horizontal, -vertical, 0).normalized*speed;
+    }
     AudioManager.Instance.PlaySound("Gameplay/HitEnemyBullet");
   }
 

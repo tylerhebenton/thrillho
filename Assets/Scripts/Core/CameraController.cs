@@ -6,19 +6,33 @@ public class CameraController : MonoBehaviour {
   private Vector3 initialPosition;
   private float orthoSize;
 
+  private float maxX = 0f;
+
 	// Use this for initialization
 	void Start () {
     initialPosition = transform.position;
     orthoSize = Camera.main.orthographicSize;
+    maxX = transform.position.x;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-    Camera.main.orthographicSize = orthoSize;
+    //Camera.main.orthographicSize = orthoSize;
+
+
 	}
+
+  public void FollowCharacterPosition(Vector3 heroPosition) {
+    if(curWaypoint != null && curWaypoint.camMode == CameraWaypoint.CamModes.Follow && heroPosition.x > maxX) {
+      maxX = heroPosition.x;
+      //TODO follow along the line towards the next waypoint, not just snapped on Y using maxX
+      this.transform.position = new Vector3(maxX, this.transform.position.y, this.transform.position.z);
+    }
+  }
 
   private int curWaypointIndex = 0;
   private Level curLevel = null;
+  private CameraWaypoint curWaypoint = null;
   public void FollowWaypoints(Level level) {
     curLevel = level;
     Go.killAllTweensWithTarget(this.transform);
@@ -38,11 +52,14 @@ public class CameraController : MonoBehaviour {
   }
 
   public void GoToWaypoint(CameraWaypoint waypoint) {
-    float delta = (transform.position - waypoint.transform.position).magnitude;
-    float timeToTarget = delta / waypoint.speed;
-    Go.to(this.transform, timeToTarget, new GoTweenConfig().position(waypoint.transform.position).onComplete((_)=>{
-      NextWaypoint();
-    }));
+    curWaypoint = waypoint;
+    if(waypoint.camMode == CameraWaypoint.CamModes.Auto) {
+      float delta = (transform.position - waypoint.transform.position).magnitude;
+      float timeToTarget = delta / waypoint.speed;
+      Go.to(this.transform, timeToTarget, new GoTweenConfig().position(waypoint.transform.position).onComplete((_) => {
+        NextWaypoint();
+      }));
+    }
   }
 
   private void NextWaypoint() {

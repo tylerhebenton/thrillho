@@ -7,9 +7,14 @@ public class SceneSwitcher {
 	public static void SwitchToStartup() {
 		SwitchToScene ("startup");
 	}
+
+	[MenuItem("Thrillho/Scenes/Welcome", false, 1)]
+	public static void SwitchToWelcome() {
+		SwitchToScene ("welcome");
+	}
 	
 	[MenuItem("Thrillho/Scenes/Game", false, 1)]
-	public static void SwitchToBaseCamp() {
+	public static void SwitchToGame() {
 		SwitchToScene ("game");
 	}
 	
