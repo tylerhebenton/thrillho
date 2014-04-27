@@ -990,7 +990,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2.23715734, y: -.818105876, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400006}
@@ -2241,8 +2241,8 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Size: {x: 2.5, y: 2}
-  m_Center: {x: .75, y: 0}
+  m_Size: {x: 1.5, y: 2}
+  m_Center: {x: 0, y: 0}
 --- !u!61 &6100004
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -2266,6 +2266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runAcceleration: 5000
+  horizontalJumpAcceleration: 1000
   walkTopSpeed: 3.5
   runTopSpeed: 9
   kineticFriction: .800000012
@@ -2312,6 +2313,8 @@ MonoBehaviour:
   controller: {fileID: 11400000}
   bulletPrefab: {fileID: 100000, guid: ddb40c5ecd1984f2ea6c47c5a601cbae, type: 2}
   speed: 20
+  spawnOffset: {x: 0, y: -1, z: 0}
+  cooldown: 1
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
