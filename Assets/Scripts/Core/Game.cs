@@ -17,6 +17,7 @@ public static class Game {
       initialized = true;
 
       //Bake AudioManager so there's an audio listener in the scene
+      #pragma warning disable 219
       AudioManager bakedAudioManager = AudioManager.Instance;
     }
   }

@@ -45,15 +45,21 @@ public class CarvalloController : MonoBehaviour {
 
   public CameraController CameraController { get; set; }
 
+  private CarvalloAnimator animator;
+
 	void Start () {
 		initialGravity = rigidbody2D.gravityScale;
     footLayer = LayerMask.NameToLayer("foot");
     platformLayer = LayerMask.NameToLayer("platform");
+    animator = this.GetComponent<CarvalloAnimator>();
 	}
 
   void Update() {
     if(CameraController) {
       CameraController.FollowCharacterPosition(this.transform.position);
+    }
+    if(animator) {
+      //animator.ValuesUpdate(this);
     }
   }
 	
@@ -97,6 +103,7 @@ public class CarvalloController : MonoBehaviour {
 			if(grounded && jumpLetGo){
 				jumpStartTime = Time.time;
         AudioManager.Instance.PlaySound("Gameplay/Jump");
+        animator.Jump();
         jumpLetGo = false;
         grounded = false;
 			}
@@ -118,6 +125,7 @@ public class CarvalloController : MonoBehaviour {
 				rigidbody2D.gravityScale = initialGravity;
 				headingDown = false;
         grounded = true;
+        animator.Grounded();
 			}
     }
     bool jumpingDown = (Input.GetButton(InputAxes.JUMP) && vertical > 0.7f);
