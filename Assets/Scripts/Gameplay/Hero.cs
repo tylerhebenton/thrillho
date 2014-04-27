@@ -53,12 +53,20 @@ public class Hero : Unit {
   
   private IEnumerator RespawnInternal(){
     invincible = true;
+    yield return new WaitForSeconds(0.1f);
     CarvalloAnimator ca = GetComponent<CarvalloAnimator>();
+    bool ticktock = false;
+    Vector3 modelLocalPos = ca.model.transform.localPosition;
     for(int i = 0; i < 50; ++i){
-      ca.model.gameObject.SetActive(!ca.model.gameObject.activeInHierarchy);
+      if(ticktock){
+        ca.model.transform.position = Camera.main.transform.position + Vector3.back*10;
+      } else {
+        ca.model.transform.localPosition = modelLocalPos;
+      }
       yield return new WaitForSeconds(0.02f);
+      ticktock = !ticktock;
     }
-    ca.model.gameObject.SetActive(true);
+    ca.model.transform.localPosition = modelLocalPos;
     invincible = false;
   }
 }

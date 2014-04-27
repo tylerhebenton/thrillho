@@ -30,6 +30,10 @@ public class CarvalloAnimator : MonoBehaviour {
     }
   }
 
+  void LateUpdate(){
+    rigAnimator.transform.localPosition = Vector3.zero;
+  }
+
   public void SetVelocity(Vector2 vel) {
     if(rigAnimator) {
       rigAnimator.SetFloat("velocityX", vel.x);
