@@ -11,4 +11,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c87f26adecd4327a7e31170ff0c01f, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  maxLives: 8
+  maxLives: 6
+  cameraDelayOnDeath: 2
