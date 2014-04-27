@@ -9,12 +9,12 @@ public class EnemyTurtle : Monster {
 	public void Shoot(){
 		GameObject Bullet;
 		Bullet = Instantiate(bullet, gunObject.transform.position, gunObject.transform.rotation) as GameObject;
-		bullet.GetComponent<Bullet>().velocity = gunObject.transform.TransformDirection(Vector3.up * 10);
+		bullet.GetComponent<Bullet>().velocity = gunObject.transform.TransformDirection(Vector3.up * 4);
 	}
 
   public override void OnAggro() {
-    base.OnAggro();
-
+		this.gameObject.animation.Play ();
+   		base.OnAggro();
     //TODO enable animations
   }
 }
