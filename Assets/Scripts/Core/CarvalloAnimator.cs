@@ -21,6 +21,19 @@ public class CarvalloAnimator : MonoBehaviour {
     rig.transform.parent = model.transform;
     rig.transform.localScale = Vector3.one;
     rigAnimator = rig.GetComponent<Animator>();
+
+    GameObject weaponMount = rig.FindChildRecursive("R_weapon");
+    GameObject club = GameObject.Instantiate(Game.ClubPrefab, weaponMount.transform.position, Quaternion.identity) as GameObject;
+    club.transform.parent = weaponMount.transform;
+    club.transform.localScale = Vector3.one;
+
+    //Spawn a second weapon for animation, only one is visible at a time
+    GameObject weaponMount2 = rig.FindChildRecursive("R_weapon2");
+    if(weaponMount2) {
+      club = GameObject.Instantiate(Game.ClubPrefab, weaponMount.transform.position, Quaternion.identity) as GameObject;
+      club.transform.parent = weaponMount.transform;
+      club.transform.localScale = Vector3.one;
+    }
   }
 
   void Update(){
@@ -28,6 +41,10 @@ public class CarvalloAnimator : MonoBehaviour {
     if(model) {
       model.transform.localScale = new Vector3(originalModelScale.x * facingX, originalModelScale.y, originalModelScale.z);
     }
+  }
+
+  void LateUpdate(){
+    rigAnimator.transform.localPosition = Vector3.zero;
   }
 
   public void SetVelocity(Vector2 vel) {

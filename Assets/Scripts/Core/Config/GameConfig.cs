@@ -9,6 +9,11 @@ public class GameConfig : ScriptableObject {
   [Range(0, 4f)]
   public float cameraDelayOnDeath = 2f;
 
+  [SerializeField]
+  public GameObject[] clubPrefabs;
+
+  [SerializeField]
+  public AudioClip[] clubSelectSounds;
 
   private static GameConfig _instance = null;
   public static GameConfig Instance {
