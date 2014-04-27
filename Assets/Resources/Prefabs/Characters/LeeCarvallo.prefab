@@ -211,6 +211,7 @@ MonoBehaviour:
   jumpHoldTime: .170000002
   jumpFallGravityAccel: 1.11000001
   footCollider: {fileID: 6100000}
+  animator: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,7 +255,7 @@ MonoBehaviour:
   controller: {fileID: 11400000}
   bulletPrefab: {fileID: 100000, guid: ddb40c5ecd1984f2ea6c47c5a601cbae, type: 2}
   speed: 20
-  spawnOffset: {x: 0, y: -1, z: 0}
+  spawnOffset: {x: 0, y: 0, z: 0}
   cooldown: 1
 --- !u!114 &11400008
 MonoBehaviour:
