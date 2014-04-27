@@ -148,7 +148,7 @@ public class CarvalloController : MonoBehaviour {
       MeleeFired(horizontal,vertical);
     }
     if(Input.GetButton(InputAxes.ATTACK_RANGED)){
-      RangedFired(horizontal,vertical);
+//      RangedFired(horizontal,vertical);
     }
   }
 
