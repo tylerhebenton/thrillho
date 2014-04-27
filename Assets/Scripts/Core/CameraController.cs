@@ -33,10 +33,10 @@ public class CameraController : MonoBehaviour {
       if(maxX > target.x) {
         NextWaypoint();
       } else {
-        float yVal = 0f;
-        float remainingX = target.x - maxX;
-        float pctCompl = remainingX / (target.x - source.x);
+        float completexX = maxX - source.x;
+        float pctCompl = completexX / (target.x - source.x);
         float yPos = (pctCompl * (target.y - source.y)) + source.y;
+        //yPos = this.transform.position.y;
 
         this.transform.position = new Vector3(maxX, yPos, this.transform.position.z);
       }
@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour {
 
   public void HaltThenGotoWaypoint() {
     Go.killAllTweensWithTarget(this.transform);
-    UkenTimer.SetTimeout(3f, () => {
+    UkenTimer.SetTimeout(0f, () => {
       curWaypointIndex -= 1;
       NextWaypoint();
     });
@@ -82,5 +82,10 @@ public class CameraController : MonoBehaviour {
     if(curWaypointIndex < curLevel.waypoints.Length) {
       GoToWaypoint(curLevel.waypoints[curWaypointIndex]);
     }
+  }
+
+  void OnDrawGizmos() {
+    Gizmos.color = Color.green;
+    Gizmos.DrawLine(source, target);
   }
 }
