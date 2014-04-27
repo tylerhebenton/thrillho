@@ -13,6 +13,7 @@ public class Startup : MonoBehaviour {
 
   void Start() {
     Game.Initialize();
+    AudioManager.Instance.StopMusic();
     acceptingInput = true;
   }
 

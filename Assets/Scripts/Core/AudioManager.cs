@@ -21,12 +21,27 @@ public class AudioManager : MonoBehaviour {
     }
   }
 
+  [SerializeField]
+  private AudioSource musicTrack;
+
 
   #endregion
 
   private static Dictionary<string,string> speakerMap = new Dictionary<string,string>{
     //{"Characters/footsteps", "FootstepSpeaker"}
   };
+
+  public void PlayMusic() {
+    if(musicTrack) {
+      musicTrack.Play();
+    }
+  }
+
+  public void StopMusic() {
+    if(musicTrack) {
+      musicTrack.Stop();
+    }
+  }
 
   public void PlaySound(string soundName) {
     if(soundName == null || soundName.Equals("")) {
