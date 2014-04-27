@@ -83,12 +83,12 @@ Transition:
   m_SrcState: {fileID: 110242014}
   m_DstState: {fileID: 110200000}
   m_TransitionDuration: .0197962224
-  m_TransitionOffset: 0
+  m_TransitionOffset: .220742747
   m_Conditions:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: .119000368
+    m_ExitTime: .964721501
   - m_ConditionMode: 4
     m_ConditionEvent: velocityX
     m_EventTreshold: -.100000001
@@ -104,13 +104,13 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110242014}
   m_DstState: {fileID: 110200000}
-  m_TransitionDuration: .789473712
-  m_TransitionOffset: 0
+  m_TransitionDuration: .0156638194
+  m_TransitionOffset: .367559731
   m_Conditions:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: .210526288
+    m_ExitTime: .984336197
   - m_ConditionMode: 3
     m_ConditionEvent: velocityX
     m_EventTreshold: .100000001
@@ -162,13 +162,13 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110273788}
   m_DstState: {fileID: 110200000}
-  m_TransitionDuration: .25
-  m_TransitionOffset: 0
+  m_TransitionDuration: 0
+  m_TransitionOffset: 1
   m_Conditions:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: .75
+    m_ExitTime: .960201681
   - m_ConditionMode: 4
     m_ConditionEvent: velocityX
     m_EventTreshold: -.100000001
@@ -296,13 +296,13 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110273788}
   m_DstState: {fileID: 110217914}
-  m_TransitionDuration: .0317859948
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: .099336639
+    m_ExitTime: .939339399
   - m_ConditionMode: 4
     m_ConditionEvent: velocityX
     m_EventTreshold: .100000001
@@ -376,13 +376,13 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110242014}
   m_DstState: {fileID: 110217914}
-  m_TransitionDuration: .00473480485
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: 1
+    m_ExitTime: .963389635
   - m_ConditionMode: 4
     m_ConditionEvent: velocityX
     m_EventTreshold: .100000001
@@ -402,13 +402,13 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110273788}
   m_DstState: {fileID: 110200000}
-  m_TransitionDuration: .0937666297
-  m_TransitionOffset: .419363558
+  m_TransitionDuration: .00528249983
+  m_TransitionOffset: 1
   m_Conditions:
   - m_ConditionMode: 5
     m_ConditionEvent: 
     m_EventTreshold: 0
-    m_ExitTime: .889787793
+    m_ExitTime: .958946228
   - m_ConditionMode: 3
     m_ConditionEvent: velocityX
     m_EventTreshold: .100000001
@@ -566,7 +566,7 @@ State:
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: 4f3c5c1135ae44eec95025a7202359de, type: 2}
+  - {fileID: 7400000, guid: 0df2a1b410ebb4bafae04849f3ee4824, type: 2}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: 432, y: 84, z: 0}
   m_IKOnFeet: 0

@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Hero : Unit {
+
+  [SerializeField]
+  private GameObject respawnPlatformPrefab;
 
   private const float MAX_DISTANCE_BELLOW = 50f;
 
@@ -52,6 +57,9 @@ public class Hero : Unit {
   }
   
   private IEnumerator RespawnInternal(){
+
+    GameObject respawnPlatform = GameObject.Instantiate(respawnPlatformPrefab, transform.position + Vector3.down * 2, transform.rotation) as GameObject;
+
     invincible = true;
     yield return new WaitForSeconds(0.1f);
     CarvalloAnimator ca = GetComponent<CarvalloAnimator>();
@@ -68,5 +76,14 @@ public class Hero : Unit {
     }
     ca.model.transform.localPosition = modelLocalPos;
     invincible = false;
+    yield return new WaitForSeconds(0.5f);
+    List<Renderer> platformRenderers = respawnPlatform.GetComponentsInChildren<Renderer>().ToList();
+    for(int i = 0; i < 50; ++i){
+      yield return new WaitForSeconds(0.02f);
+      foreach(Renderer r in platformRenderers){
+        r.enabled = !r.enabled;
+      }
+    }
+    GameObject.Destroy(respawnPlatform);
   }
 }

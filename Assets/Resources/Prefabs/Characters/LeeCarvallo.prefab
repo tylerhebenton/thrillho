@@ -224,6 +224,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 1
   unitConfig: {fileID: 0}
+  respawnPlatformPrefab: {fileID: 100002, guid: cf1ed9bff36ff49bebfbab4a093f7730,
+    type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
