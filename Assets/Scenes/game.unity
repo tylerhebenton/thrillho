@@ -4116,7 +4116,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1159361325}
   - 61: {fileID: 1159361327}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: LeftScreenCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4130,7 +4130,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1159361324}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4810524, y: 13.7000122, z: 0}
+  m_LocalPosition: {x: -3.3599999, y: 13.7000122, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 685386677}
@@ -4141,7 +4141,7 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1159361324}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4d1aa511722ec4a9c94a164a963104f6, type: 2}
   m_IsTrigger: 0
   m_Size: {x: 5.23000002, y: 37.25}
   m_Center: {x: 0, y: 0}
@@ -7288,7 +7288,7 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2004648445}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 4d1aa511722ec4a9c94a164a963104f6, type: 2}
   m_IsTrigger: 0
   m_Size: {x: 5.23000002, y: 37.25}
   m_Center: {x: 0, y: 0}
