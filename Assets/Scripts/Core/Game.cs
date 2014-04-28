@@ -21,7 +21,7 @@ public static class Game {
       AudioManager bakedAudioManager = AudioManager.Instance;
     }
     if(GameConfig.Instance.clubPrefabs != null && GameConfig.Instance.clubPrefabs.Length > 0) {
-      ClubPrefab = GameConfig.Instance.clubPrefabs[0];
+      //ClubPrefab = GameConfig.Instance.clubPrefabs[0];
     }
   }
 
